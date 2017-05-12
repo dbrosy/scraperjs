@@ -7,6 +7,6 @@ ADD app.js app.js
 RUN mkdir ./public
 ADD index.html ./public/index.html
 
-EXPOSE 8090
+EXPOSE 8000
 
 CMD ["node","app.js"]
