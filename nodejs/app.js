@@ -29,11 +29,12 @@ var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
 
 // using cheerio
 global.list = [];
-global.html = [];
+global.htmldata = [];
 request(url, function (error, response, html) {
     if (!error && response.statusCode == 200) {
         var $ = cheerio.load(html, { normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
-        html.push($(".cats catl").eq(1).html());
+        var d = $(".cats catl").eq(1).html();
+        htmldata.push(d);
         $('div[class="cats catl"]').each(function (i, element) {
             var mpn = $(this).next().next().text();
             var desc = $(this).next().next().next().text();
@@ -59,7 +60,7 @@ app.get('/api/list', function (req, res) {
 });
 
 app.get('/api/html', function (req, res) {
-    res.send(html);
+    res.send(htmldata);
 });
 
 // start the server in the port 8000 !
