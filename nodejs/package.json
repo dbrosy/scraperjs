@@ -1,0 +1,16 @@
+{
+  "name": "ScraperJS",
+  "description": "ScraperJS API",
+  "version": "1.0.0",
+  "main": "app.js",
+  "keywords": [],
+  "author": "Damian Brosnahan",
+  "license": "ISC",
+  "dependencies": {
+    "node-static": "0.7.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dbrosy/scraperjs.git"
+  }
+}
