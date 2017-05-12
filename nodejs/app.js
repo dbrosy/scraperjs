@@ -29,11 +29,10 @@ var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
 
 // using cheerio
 app.get('/api', function (req, res) {
-    var list = [];
     request(url, function (error, response, html) {
         if (!error && response.statusCode == 200) {
             var $ = cheerio.load(html, { normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
-            
+            var list = [];
             $('div[class="cats catl"]').each(function (i, element) {
                 var mpn = $(this).next().next().text();
                 var desc = $(this).next().next().next().text();
