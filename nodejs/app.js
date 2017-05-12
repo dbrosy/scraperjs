@@ -12,6 +12,7 @@ app.get('/', function (req, res) {
     res.send('<b>Express</b> http server running on port: ' + port);
 });
 
+/*
 // On localhost:8000/welcome
 app.get('/welcome', function (req, res) {
     res.send('<b>Hello</b> welcome to my http server made with express');
@@ -21,6 +22,19 @@ app.get('/welcome', function (req, res) {
 app.use(function(req, res, next) {
     res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
 });
+
+*/
+var code = '7C0307';
+var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
+
+request(url, function(err, resp, body) {
+if(err){
+console.log(err);
+} else {
+console.log(body);
+}
+})
+
 
 // start the server in the port 8000 !
 app.listen(8000, function () {
