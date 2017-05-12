@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
     res.send('<b>Express</b> http server running on port: ' + port);
 });
 
-// On localhost:3000/welcome
+// On localhost:8000/welcome
 app.get('/welcome', function (req, res) {
     res.send('<b>Hello</b> welcome to my http server made with express');
 });
@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
     res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
 });
 
-// start the server in the port 3000 !
-app.listen(3000, function () {
+// start the server in the port 8000 !
+app.listen(8000, function () {
     console.log('App listening on port: ' + port);
 });
