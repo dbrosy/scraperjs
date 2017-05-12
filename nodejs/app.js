@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
 */
 var code = '7C0307';
 var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
-
+/*
 request(url, function(err, resp, body) {
 if(err){
 console.log(err);
@@ -34,6 +34,24 @@ console.log(err);
 console.log(body);
 }
 })
+*/
+
+// using cheerio
+request(url, function(err, resp, body) {
+    var $ = cheerio.load(body);
+    var list = [];
+    $('div[class="cats cat1"]').each(function(i, element){
+        var mpn = $(this).next().next().text();
+        var desc = $(this).next().next().next().text();
+        
+        // Our parsed meta data object
+        var metadata = {
+            mpn: mpn,
+            desc: desc
+        };
+        console.dir(metadata);
+     });
+});
 
 
 // start the server in the port 8000 !
