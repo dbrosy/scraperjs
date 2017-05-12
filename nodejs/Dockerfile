@@ -4,8 +4,6 @@ ADD package.json package.json
 RUN npm install
 
 ADD app.js app.js
-RUN mkdir ./public
-ADD index.html ./public/index.html
 
 EXPOSE 8000
 
