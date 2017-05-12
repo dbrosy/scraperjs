@@ -28,7 +28,7 @@ var code = '7C0307';
 var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
 
 // using cheerio
-app.get('/welcome', function (req, res) {
+app.get('/api', function (req, res) {
     var list = [];
     request(url, function (error, response, html) {
         if (!error && response.statusCode == 200) {
