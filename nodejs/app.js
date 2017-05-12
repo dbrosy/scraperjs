@@ -41,7 +41,7 @@ request(url, function(error, response, html) {
     if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html,{ normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
     var list = [];
-    $('div[class="cats cat1"]').each(function(i, element){
+    $('div[class="cats catl"]').each(function(i, element){
         var mpn = $(this).next().next().text();
         var desc = $(this).next().next().next().text();
         
