@@ -28,30 +28,32 @@ var code = '7C0307';
 var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
 
 // using cheerio
+global.list = [];
+request(url, function (error, response, html) {
+    if (!error && response.statusCode == 200) {
+        var $ = cheerio.load(html, { normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
+        $('div[class="cats catl"]').each(function (i, element) {
+            var mpn = $(this).next().next().text();
+            var desc = $(this).next().next().next().text();
+
+            // Our parsed meta data object
+            var metadata = {
+                mpn: mpn,
+                desc: desc
+            };
+            // Push meta-data into parsedResults array
+            list.push(metadata);
+        });
+
+        // Log our finished parse results in the terminal
+        console.log(list);
+    } else {
+        console.log('error - status not 200');
+    }
+});
+
+
 app.get('/api', function (req, res) {
-    request(url, function (error, response, html) {
-        if (!error && response.statusCode == 200) {
-            var $ = cheerio.load(html, { normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
-            var list = [];
-            $('div[class="cats catl"]').each(function (i, element) {
-                var mpn = $(this).next().next().text();
-                var desc = $(this).next().next().next().text();
-
-                // Our parsed meta data object
-                var metadata = {
-                    mpn: mpn,
-                    desc: desc
-                };
-                // Push meta-data into parsedResults array
-                list.push(metadata);
-            });
-
-            // Log our finished parse results in the terminal
-            console.log(list);
-        } else {
-            console.log('error - status not 200');
-        }
-    });
     res.send(list);
 });
 
