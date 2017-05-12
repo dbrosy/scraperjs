@@ -37,7 +37,7 @@ console.log(body);
 */
 
 // using cheerio
-request(url, function(err, resp, body) {
+request(url, function(error, response, body) {
     if (!error && response.statusCode == 200) {
     var $ = cheerio.load(body);
     var list = [];
@@ -56,6 +56,8 @@ request(url, function(err, resp, body) {
      
      // Log our finished parse results in the terminal
      console.log(list);     
+    } else {
+        console.log('error - status not 200');
     }
 });
 
