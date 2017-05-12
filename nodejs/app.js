@@ -26,41 +26,35 @@ app.use(function(req, res, next) {
 */
 var code = '7C0307';
 var url = 'https://www.offroadeq.com/en/caterpillar/' + code;
-/*
-request(url, function(err, resp, body) {
-if(err){
-console.log(err);
-} else {
-console.log(body);
-}
-})
-*/
 
 // using cheerio
-request(url, function(error, response, html) {
-    if (!error && response.statusCode == 200) {
-    var $ = cheerio.load(html,{ normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
+app.get('/welcome', function (req, res) {
     var list = [];
-    $('div[class="cats catl"]').each(function(i, element){
-        var mpn = $(this).next().next().text();
-        var desc = $(this).next().next().next().text();
-        
-        // Our parsed meta data object
-        var metadata = {
-            mpn: mpn,
-            desc: desc
-        };
-        // Push meta-data into parsedResults array
-        list.push(metadata);
-     });
-     
-     // Log our finished parse results in the terminal
-     console.log(list);     
-    } else {
-        console.log('error - status not 200');
-    }
-});
+    request(url, function (error, response, html) {
+        if (!error && response.statusCode == 200) {
+            var $ = cheerio.load(html, { normalizeWhitespace: false, xmlMode: false, decodeEntities: true });
+            
+            $('div[class="cats catl"]').each(function (i, element) {
+                var mpn = $(this).next().next().text();
+                var desc = $(this).next().next().next().text();
 
+                // Our parsed meta data object
+                var metadata = {
+                    mpn: mpn,
+                    desc: desc
+                };
+                // Push meta-data into parsedResults array
+                list.push(metadata);
+            });
+
+            // Log our finished parse results in the terminal
+            console.log(list);
+        } else {
+            console.log('error - status not 200');
+        }
+    });
+    res.send(list);
+});
 
 // start the server in the port 8000 !
 app.listen(8000, function () {
