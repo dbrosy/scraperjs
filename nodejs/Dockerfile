@@ -1,7 +1,7 @@
 FROM nodesource/node:latest
 
 ADD package.json package.json
-RUN npm install
+RUN npm install express request cheerio path handlebars --save
 
 ADD app.js app.js
 
