@@ -38,6 +38,7 @@ console.log(body);
 
 // using cheerio
 request(url, function(err, resp, body) {
+    if (!error && response.statusCode == 200) {
     var $ = cheerio.load(body);
     var list = [];
     $('div[class="cats cat1"]').each(function(i, element){
@@ -49,8 +50,13 @@ request(url, function(err, resp, body) {
             mpn: mpn,
             desc: desc
         };
-        console.dir(metadata);
+        // Push meta-data into parsedResults array
+        list.push(metadata);
      });
+     
+     // Log our finished parse results in the terminal
+     console.log(list);     
+    }
 });
 
 
